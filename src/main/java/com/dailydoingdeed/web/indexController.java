@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@RequiredArgsConstructor
-@Controller
+@RequiredArgsConstructor // 빼기
+@Controller // 빼기
 public class indexController {
 
     private final PostsService postsService;

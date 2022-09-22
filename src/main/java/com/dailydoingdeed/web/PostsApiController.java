@@ -12,33 +12,34 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+// @RequestMapping("/posts") -- 해당 어노테이션 추가시 아래 Mapping에서 "/posts" 생략
 public class PostsApiController {
 
     private final PostsService postsService;
 
-    @PostMapping("/api/v1/posts")
+    @PostMapping("/api/v1/posts") // @PostMapping("/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
         return postsService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/posts/{id}")
+    @PutMapping("/api/v1/posts/{id}") // @PatchMapping("/posts/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto){
         return postsService.update(id, requestDto);
     }
 
-    @DeleteMapping("/api/v1/posts/{id}")
+    @DeleteMapping("/api/v1/posts/{id}") // @DeleteMapping("/posts/{id}")
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
     }
 
-    @GetMapping("/api/v1/posts/{id}")
+    @GetMapping("/api/v1/posts/{id}") // @GetMapping("/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id){
         return postsService.findById(id);
     }
 
     // 모든 리스트 가져오기 api (테스트 작성)
-    @GetMapping("/api/v1/posts/all")
+    @GetMapping("/api/v1/posts/all") // @GetMapping("/posts/all")
     public List<PostsListResponseDto> all(){
         return postsService.findAllDesc();
     }
