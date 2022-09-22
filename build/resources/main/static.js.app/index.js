@@ -1,7 +1,6 @@
 var main = {
     init : function () {
         var _this = this;
-
         $('#btn-save').on('click', function () {
             _this.save();
         });
@@ -13,7 +12,6 @@ var main = {
             _this.delete();
         });
     },
-
     save : function () {
         var data = {
             title: $('#title').val(),
@@ -35,13 +33,13 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-
     <!-- 신규로 추가될 update function입니다. -->
     update : function () {
         var data = {
             title: $('#title').val(),
             content: $('#content').val()
         };
+
         var id = $('#id').val();
 
         $.ajax({
@@ -66,8 +64,7 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-
-    delete: function () {
+    delete : function () {
         var id = $('#id').val();
 
         $.ajax({
