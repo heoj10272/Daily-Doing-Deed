@@ -1,0 +1,10 @@
+= Daily-Doing-Deed
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toc-title: API
+:toclevels: 1
+:sectlinks:
+
+== Save Posts
+operation::posts-api-controller-test/save-posts[snippets='http-request,http-response,request-body,response-body,request-fields,response-fields']
