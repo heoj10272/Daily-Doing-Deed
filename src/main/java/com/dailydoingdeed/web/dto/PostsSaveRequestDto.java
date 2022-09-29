@@ -2,10 +2,10 @@ package com.dailydoingdeed.web.dto;
 
 import com.dailydoingdeed.domain.posts.Posts;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @NoArgsConstructor
 public class PostsSaveRequestDto {
     private String title;
