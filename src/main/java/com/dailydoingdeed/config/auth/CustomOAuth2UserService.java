@@ -1,7 +1,6 @@
 package com.dailydoingdeed.config.auth;
 
 import com.dailydoingdeed.config.auth.dto.OAuthAttributes;
-import com.dailydoingdeed.config.auth.dto.SessionUser;
 import com.dailydoingdeed.domain.user.User;
 import com.dailydoingdeed.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +34,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         User user = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new SessionUser(user));
-
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttributes(),
@@ -48,7 +45,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         User user = userRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
                 .orElse(attributes.toEntity());
-
+        user.changePassword("No");
         return userRepository.save(user);
     }
 }

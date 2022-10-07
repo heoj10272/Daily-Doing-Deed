@@ -3,8 +3,8 @@ package com.dailydoingdeed.web;
 import com.dailydoingdeed.config.auth.SecurityConfig;
 import com.dailydoingdeed.docs.support.AbstractRestDocsTests;
 import com.dailydoingdeed.global.response.common.SingleResponseData;
-import com.dailydoingdeed.posts.PostsService;
-import com.dailydoingdeed.web.dto.PostsSaveRequestDto;
+import com.dailydoingdeed.service.PostsService;
+import com.dailydoingdeed.web.dto.PostsSaveRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(
-        value = PostsApiController.class,
+        value = PostsController.class,
         excludeFilters = {
                 @ComponentScan.Filter(
                         type = FilterType.ASSIGNABLE_TYPE,
@@ -40,7 +40,7 @@ class PostsApiControllerTest extends AbstractRestDocsTests {
     @DisplayName("save post - Post /posts")
     void savePosts() throws Exception {
         //given
-        PostsSaveRequestDto request = PostsSaveRequestDto.builder()
+        PostsSaveRequest request = PostsSaveRequest.builder()
                 .title("posts1")
                 .content("hello world")
                 .author("user1")
