@@ -1,4 +1,4 @@
-package com.dailydoingdeed.posts;
+package com.dailydoingdeed.service;
 
 import com.dailydoingdeed.domain.posts.Posts;
 import com.dailydoingdeed.domain.posts.PostsRepository;

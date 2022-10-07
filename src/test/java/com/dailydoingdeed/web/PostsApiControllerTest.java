@@ -3,7 +3,7 @@ package com.dailydoingdeed.web;
 import com.dailydoingdeed.config.auth.SecurityConfig;
 import com.dailydoingdeed.docs.support.AbstractRestDocsTests;
 import com.dailydoingdeed.global.response.common.SingleResponseData;
-import com.dailydoingdeed.posts.PostsService;
+import com.dailydoingdeed.service.PostsService;
 import com.dailydoingdeed.web.dto.PostsSaveRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
