@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PostsSaveRequestDto {
+public class PostsSaveRequest {
     private String title;
     private String content;
     private String author;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author){
+    public PostsSaveRequest(String title, String content, String author){
         this.title = title;
         this.content = content;
         this.author = author;
