@@ -2,11 +2,15 @@ package com.dailydoingdeed.web;
 
 import com.dailydoingdeed.config.auth.SecurityConfig;
 import com.dailydoingdeed.docs.support.AbstractRestDocsTests;
+<<<<<<< HEAD
 import com.dailydoingdeed.domain.posts.Posts;
 import com.dailydoingdeed.domain.user.Role;
 import com.dailydoingdeed.domain.user.User;
 import com.dailydoingdeed.global.response.common.SingleResponseData;
 import com.dailydoingdeed.service.CommentService;
+=======
+import com.dailydoingdeed.global.response.common.SingleResponseData;
+>>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 import com.dailydoingdeed.service.PostsService;
 import com.dailydoingdeed.web.dto.PostsSaveRequest;
 import org.junit.jupiter.api.DisplayName;
@@ -35,18 +39,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 )
         }
 )
+<<<<<<< HEAD
 
+=======
+>>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 class PostsApiControllerTest extends AbstractRestDocsTests {
 
     @MockBean
     protected PostsService postsService;
+<<<<<<< HEAD
     @MockBean
     protected CommentService commentService;
+=======
+>>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 
     @Test
     @DisplayName("save post - Post /posts")
     void savePosts() throws Exception {
         //given
+<<<<<<< HEAD
         User user = User.builder()
                 .name ("user1")
                 .email("user1")
@@ -69,6 +80,22 @@ class PostsApiControllerTest extends AbstractRestDocsTests {
                 .contentType(APPLICATION_JSON));
 
         SingleResponseData responseData = SingleResponseData.of(postsService.save(request.toEntity ()));
+=======
+        PostsSaveRequest request = PostsSaveRequest.builder()
+                .title("posts1")
+                .content("hello world")
+                .author("user1")
+                .build();
+
+        Long id = 1L;
+        given(postsService.save(request)).willReturn(1L);
+        //when
+        ResultActions action = mockMvc.perform(post("/api/v1/posts")
+                .content(toJson(request))
+                .contentType(APPLICATION_JSON));
+
+        SingleResponseData responseData = SingleResponseData.of(postsService.save(request));
+>>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 
         //then
         action.andExpect(status().isOk())
@@ -91,5 +118,8 @@ class PostsApiControllerTest extends AbstractRestDocsTests {
                         )
                 ));
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 }

@@ -18,7 +18,10 @@ import java.io.IOException;
 import static com.dailydoingdeed.config.auth.jwt.JwtProperties.*;
 import static com.dailydoingdeed.config.auth.jwt.JwtUtils.removePrefix;
 
+<<<<<<< HEAD
 // jwt 허가
+=======
+>>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UserRepository userRepository;
@@ -28,7 +31,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         this.userRepository = userRepository;
     }
 
+<<<<<<< HEAD
     @Override // 토큰 정보로 유저의 역할추출
+=======
+    @Override
+>>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String jwtHeader = request.getHeader(HEADER_STRING);
 
