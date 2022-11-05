@@ -21,11 +21,7 @@ var main = {
 
         $.ajax({
             type: 'POST',
-<<<<<<< HEAD
             url: '/posts',
-=======
-            url: '/api/v1/posts',
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -57,11 +53,7 @@ var main = {
             <!-- 수정(Update) - PUT-->
             <!-- 삭제(Delete) - DELETE -->
             type: 'PUT',
-<<<<<<< HEAD
             url: '/posts/'+id,
-=======
-            url: '/api/v1/posts/'+id,
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -77,11 +69,7 @@ var main = {
 
         $.ajax({
             type: 'DELETE',
-<<<<<<< HEAD
             url: '/posts/'+id,
-=======
-            url: '/api/v1/posts/'+id,
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
             dataType: 'json',
             contentType:'application/json; charset=utf-8'
         }).done(function() {

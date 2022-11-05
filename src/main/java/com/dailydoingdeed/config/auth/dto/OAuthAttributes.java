@@ -62,8 +62,4 @@ public class OAuthAttributes {
                 .role(Role.USER)
                 .build();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320

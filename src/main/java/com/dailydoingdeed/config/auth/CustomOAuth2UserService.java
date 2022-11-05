@@ -18,16 +18,10 @@ import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
-<<<<<<< HEAD
 // 소셜로그인 시에 유저 정보 처리
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository;
     //private final HttpSession httpSession;
-=======
-public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-    private final UserRepository userRepository;
-    private final HttpSession httpSession;
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -39,14 +33,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .getUserInfoEndpoint().getUserNameAttributeName();
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
-<<<<<<< HEAD
         User user = saveOrUpdate(attributes);
         //httpSession.setAttribute("user", new SessionUser(user));
 
-=======
-
-        User user = saveOrUpdate(attributes);
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttributes(),

@@ -14,13 +14,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-<<<<<<< HEAD
 @EnableWebSecurity //웹 보안 활성화
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) // @PreAuthorize 메소드단위로 추가
-=======
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -31,20 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-<<<<<<< HEAD
         //시큐리티에 필터를 추가해준다!
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션을 사용하지 않기 때문에 STATELESS로 설정
-=======
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
                 .and()
                 .addFilter(corsFilter)
                 .addFilter(new JwtAuthenticationFilter(authenticationManagerBean()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManagerBean(), userRepository));
 
-<<<<<<< HEAD
         // token 을 사용하는 방식이기 때문에 csrf 를 disable 합니다.
         http.csrf()
                 .disable()
@@ -58,21 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions()
                 .sameOrigin()
                 //.disable()
-=======
-        http.csrf()
-                .disable()
-            .authorizeRequests()
-                .antMatchers("/posts/**").hasRole(Role.USER.name())
-                .anyRequest().permitAll()
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
             .and()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .logout().logoutSuccessUrl("/")
-<<<<<<< HEAD
             // 로그인
-=======
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
             .and()
                 .oauth2Login()
                     .userInfoEndpoint()

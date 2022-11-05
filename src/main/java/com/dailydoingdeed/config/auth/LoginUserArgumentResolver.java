@@ -13,10 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Component
-<<<<<<< HEAD
 // 웹에서 소셜로그인 시에 정보 저장
-=======
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final HttpSession httpSession;

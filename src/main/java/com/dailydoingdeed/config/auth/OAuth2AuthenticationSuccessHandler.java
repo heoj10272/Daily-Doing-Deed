@@ -21,11 +21,7 @@ import static com.dailydoingdeed.config.auth.jwt.JwtProperties.TOKEN_PREFIX;
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-<<<<<<< HEAD
     @Override // 로그인 성공시 정보로 토큰생성
-=======
-    @Override
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         Map<String, Object> attributes = ((DefaultOAuth2User) authentication.getPrincipal()).getAttributes();
         MyUserDetails myUserDetails = new MyUserDetails(
@@ -37,11 +33,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                         .build()
         );
 
-<<<<<<< HEAD
         String jwtToken = TOKEN_PREFIX.concat(JwtUtils.createJwtToken1(myUserDetails));
-=======
-        String jwtToken = TOKEN_PREFIX.concat(JwtUtils.createJwtToken(myUserDetails));
->>>>>>> 08cbddddd6c2e2d6fdbbdcdc509a5d29ccbbf320
         response.addHeader(HEADER_STRING, jwtToken);
 
         System.out.println("jwtToken = " + jwtToken);
