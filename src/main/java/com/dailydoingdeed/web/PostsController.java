@@ -1,7 +1,9 @@
 package com.dailydoingdeed.web;
 
+import com.dailydoingdeed.domain.posts.Posts;
 import com.dailydoingdeed.global.response.common.ListResponseData;
 import com.dailydoingdeed.global.response.common.SingleResponseData;
+import com.dailydoingdeed.service.CommentService;
 import com.dailydoingdeed.service.PostsService;
 import com.dailydoingdeed.web.dto.PostsListResponse;
 import com.dailydoingdeed.web.dto.PostsResponse;
@@ -16,15 +18,16 @@ import org.springframework.web.bind.annotation.*;
 public class PostsController {
 
     private final PostsService postsService;
+    private final CommentService commentService;
 
     @PostMapping
-    public SingleResponseData<Long> save(@RequestBody PostsSaveRequest requestDto){
-        return SingleResponseData.of(postsService.save(requestDto));
+    public SingleResponseData<Long> save(@RequestBody PostsSaveRequest request){
+        return SingleResponseData.of(postsService.save(request.toEntity ()));
     }
 
     @PatchMapping("/{id}")
-    public SingleResponseData<Long> update(@PathVariable Long id, @RequestBody PostsUpdateRequest requestDto){
-        return SingleResponseData.of(postsService.update(id, requestDto));
+    public SingleResponseData<Long> update(@PathVariable Long id, @RequestBody PostsUpdateRequest request){
+        return SingleResponseData.of(postsService.update(id, request.getTitle (), request.getContent ()));
     }
 
     @DeleteMapping("/{id}")
@@ -35,7 +38,8 @@ public class PostsController {
 
     @GetMapping("/{id}")
     public SingleResponseData<PostsResponse> findById(@PathVariable Long id){
-        return SingleResponseData.of(postsService.findById(id));
+        PostsResponse postsResponse = new PostsResponse (postsService.findById(id), commentService.findAllDesc(id));
+        return SingleResponseData.of(postsResponse);
     }
 
     @GetMapping("/all")

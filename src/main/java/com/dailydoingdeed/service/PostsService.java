@@ -2,6 +2,7 @@ package com.dailydoingdeed.service;
 
 import com.dailydoingdeed.domain.posts.Posts;
 import com.dailydoingdeed.domain.posts.PostsRepository;
+import com.dailydoingdeed.domain.user.User;
 import com.dailydoingdeed.global.response.error.exception.EntityNotFoundException;
 import com.dailydoingdeed.web.dto.PostsListResponse;
 import com.dailydoingdeed.web.dto.PostsResponse;
@@ -17,19 +18,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class PostsService {
+
     private final PostsRepository postsRepository;
 
     @Transactional
-    public Long save(PostsSaveRequest requestDto) {
-
-        return postsRepository.save(requestDto.toEntity()).getId();
+    public Long save(Posts posts) {
+        return postsRepository.save(posts).getId ();
     }
 
     @Transactional
-    public Long update(Long id, PostsUpdateRequest requestDto) {
+    public Long update(Long id, String title, String content) {
         postsRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("해당 게시글이 없습니다. id=" + id))
-                .update(requestDto.getTitle(), requestDto.getContent());
+                .update(title, content);
 
         return id;
     }
@@ -43,11 +44,11 @@ public class PostsService {
     }
 
     @Transactional(readOnly = true)
-    public PostsResponse findById(Long id) {
+    public Posts findById(Long id) {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 
-        return new PostsResponse(entity);
+        return entity;
     }
 
     @Transactional(readOnly = true)

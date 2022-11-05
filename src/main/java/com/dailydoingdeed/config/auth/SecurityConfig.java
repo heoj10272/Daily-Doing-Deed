@@ -14,8 +14,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableWebSecurity //웹 보안 활성화
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) // @PreAuthorize 메소드단위로 추가
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -26,22 +26,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //시큐리티에 필터를 추가해준다!
         http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션을 사용하지 않기 때문에 STATELESS로 설정
                 .and()
                 .addFilter(corsFilter)
                 .addFilter(new JwtAuthenticationFilter(authenticationManagerBean()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManagerBean(), userRepository));
 
+        // token 을 사용하는 방식이기 때문에 csrf 를 disable 합니다.
         http.csrf()
                 .disable()
+            // 권한 설정
             .authorizeRequests()
                 .antMatchers("/posts/**").hasRole(Role.USER.name())
                 .anyRequest().permitAll()
+            // enable h2-console
+            .and()
+                .headers()
+                .frameOptions()
+                .sameOrigin()
+                //.disable()
             .and()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .logout().logoutSuccessUrl("/")
+            // 로그인
             .and()
                 .oauth2Login()
                     .userInfoEndpoint()

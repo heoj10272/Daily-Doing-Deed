@@ -21,7 +21,7 @@ var main = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/v1/posts',
+            url: '/posts',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -53,7 +53,7 @@ var main = {
             <!-- 수정(Update) - PUT-->
             <!-- 삭제(Delete) - DELETE -->
             type: 'PUT',
-            url: '/api/v1/posts/'+id,
+            url: '/posts/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -69,7 +69,7 @@ var main = {
 
         $.ajax({
             type: 'DELETE',
-            url: '/api/v1/posts/'+id,
+            url: '/posts/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8'
         }).done(function() {

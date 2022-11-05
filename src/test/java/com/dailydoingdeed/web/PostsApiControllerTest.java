@@ -2,7 +2,11 @@ package com.dailydoingdeed.web;
 
 import com.dailydoingdeed.config.auth.SecurityConfig;
 import com.dailydoingdeed.docs.support.AbstractRestDocsTests;
+import com.dailydoingdeed.domain.posts.Posts;
+import com.dailydoingdeed.domain.user.Role;
+import com.dailydoingdeed.domain.user.User;
 import com.dailydoingdeed.global.response.common.SingleResponseData;
+import com.dailydoingdeed.service.CommentService;
 import com.dailydoingdeed.service.PostsService;
 import com.dailydoingdeed.web.dto.PostsSaveRequest;
 import org.junit.jupiter.api.DisplayName;
@@ -31,29 +35,40 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 )
         }
 )
+
 class PostsApiControllerTest extends AbstractRestDocsTests {
 
     @MockBean
     protected PostsService postsService;
+    @MockBean
+    protected CommentService commentService;
 
     @Test
     @DisplayName("save post - Post /posts")
     void savePosts() throws Exception {
         //given
+        User user = User.builder()
+                .name ("user1")
+                .email("user1")
+                .password("user1")
+                .picture (null)
+                .role (Role.USER)
+                .build();
         PostsSaveRequest request = PostsSaveRequest.builder()
                 .title("posts1")
                 .content("hello world")
-                .author("user1")
+                .author(user)
                 .build();
 
         Long id = 1L;
-        given(postsService.save(request)).willReturn(1L);
+        given(postsService.save(request.toEntity ())).willReturn(1L);
+
         //when
-        ResultActions action = mockMvc.perform(post("/api/v1/posts")
+        ResultActions action = mockMvc.perform(post("/posts")
                 .content(toJson(request))
                 .contentType(APPLICATION_JSON));
 
-        SingleResponseData responseData = SingleResponseData.of(postsService.save(request));
+        SingleResponseData responseData = SingleResponseData.of(postsService.save(request.toEntity ()));
 
         //then
         action.andExpect(status().isOk())
@@ -76,4 +91,5 @@ class PostsApiControllerTest extends AbstractRestDocsTests {
                         )
                 ));
     }
+
 }

@@ -1,6 +1,7 @@
 package com.dailydoingdeed.web.dto;
 
 import com.dailydoingdeed.domain.posts.Posts;
+import com.dailydoingdeed.domain.user.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,10 @@ import lombok.NoArgsConstructor;
 public class PostsSaveRequest {
     private String title;
     private String content;
-    private String author;
+    private User author;
 
     @Builder
-    public PostsSaveRequest(String title, String content, String author){
+    public PostsSaveRequest(String title, String content, User author){
         this.title = title;
         this.content = content;
         this.author = author;
